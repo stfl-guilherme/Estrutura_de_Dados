@@ -16,4 +16,3 @@ O objetivo é servir como material de estudo e referência prática 📖
 
 <hr>
 
-<p align="center">Feito por <strong>Guilherme</strong> ✨</p>
