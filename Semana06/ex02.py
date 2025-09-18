@@ -1,105 +1,88 @@
-class Parada:
-    def __init__(self, nome):
-        self.nome = nome
+'''
+Um ônibus urbano segue sempre o mesmo trajeto circular.
+Cada nó da lista representa uma parada de ônibus.
+Implemente funções para adicionar uma nova parada, remover uma parada e simular o percurso, imprimindo as paradas em sequência.
+'''
+class No:
+    def __init__(self, nome_parada):
+        self.nome_parada = nome_parada
         self.proximo = None
         self.anterior = None
 
-def adicionar_parada(lista, nome):
-    nova = Parada(nome)
+def menu():
+    print("-=-MENU-=-")
+    print("1 - Adicionar parada")
+    print("2 - Remover parada")
+    print("3 - Simular percurso")
+    print("4 - Sair")
+    opc = int(input("Digite a opção: "))
+    return opc
+
+def adicionar_parada(lista, nome_parada):
+    aux = No(nome_parada)
     if lista is None:
-        lista = nova
-        lista.proximo = lista
-        lista.anterior = lista
+        lista = aux
+        lista.proximo = aux
+        lista.anterior = aux
         return lista
     else:
-        ultima = lista.anterior
-        nova.proximo = lista
-        nova.anterior = ultima
-        ultima.proximo = nova
-        lista.anterior = nova
-        return lista  # head continua sendo o mesmo
-
-def remover_parada(lista, nome):
+        ultimo = lista.anterior
+        aux.proximo = lista
+        aux.anterior = ultimo
+        ultimo.proximo = aux
+        lista.anterior = aux
+        return aux
+    
+def remover_parada(lista, nome_parada):
     if lista is None:
-        print("Não há paradas cadastradas.")
+        print("A lista está vazia!")
         return None
 
     aux = lista
     while True:
-        if aux.nome == nome:
-            if aux.proximo == aux:  
-                return None  # só havia uma parada
-
-            aux.anterior.proximo = aux.proximo
-            aux.proximo.anterior = aux.anterior
-
-            if aux == lista:
-                return aux.proximo  # head muda para a próxima
+        if aux.nome_parada == nome_parada:
+            # caso único nó
+            if aux.proximo == aux:
+                return None
+            # removendo a cabeça
+            elif aux == lista:
+                aux.proximo.anterior = aux.anterior
+                aux.anterior.proximo = aux.proximo
+                return aux.proximo
+            # removendo outro nó qualquer
             else:
+                aux.anterior.proximo = aux.proximo
+                aux.proximo.anterior = aux.anterior
                 return lista
-
+        aux = aux.proximo
+        if aux == lista:  
+            print("Parada não encontrada!")
+            return lista
+        
+def simular(lista):
+    aux = lista
+    if lista == None:
+        print("A lista está vazia")
+        return
+    while True:
+        print("Ultima Parada",aux.anterior.nome_parada ,"Parada Atual", aux.nome_parada,"Proxima Parada: ", aux.proximo.nome_parada)
         aux = aux.proximo
         if aux == lista:
-            print("Parada não encontrada.")
             return lista
-
-def simular_percurso(lista, voltas=1):
-    if lista is None:
-        print("Nenhuma parada no trajeto.")
-        return
-
-    atual = lista
-    for v in range(voltas):
-        print(f"\nVolta {v+1}:")
-        while True:
-            print(f" Ônibus na parada: {atual.nome}")
-            atual = atual.proximo
-            if atual == lista:
-                break
-
-def mostrar_paradas(lista):
-    if lista is None:
-        print("Nenhuma parada cadastrada.")
-        return
-    atual = lista
-    paradas = []
-    while True:
-        paradas.append(atual.nome)
-        atual = atual.proximo
-        if atual == lista:
-            break
-    print(" → ".join(paradas))
-
-# ---------------- MAIN ----------------
-def menu():
-    print("\n-=- MENU -=-")
-    print("1 - Adicionar parada")
-    print("2 - Remover parada")
-    print("3 - Mostrar paradas")
-    print("4 - Simular percurso")
-    print("5 - Sair")
-    opc = int(input("Escolha: "))
-    return opc
-
+        
 def main():
+    opc = 0
     lista = None
-    while True:
+    while opc != 4:
         opc = menu()
         if opc == 1:
-            nome = input("Digite o nome da parada: ")
+            nome = input("Digite o nome da parada:\n")
             lista = adicionar_parada(lista, nome)
         elif opc == 2:
-            nome = input("Digite o nome da parada para remover: ")
+            nome = input("Digite o nome da parada para remover:\n")
             lista = remover_parada(lista, nome)
         elif opc == 3:
-            mostrar_paradas(lista)
+            lista = simular(lista)
         elif opc == 4:
-            voltas = int(input("Quantas voltas o ônibus deve dar? "))
-            simular_percurso(lista, voltas)
-        elif opc == 5:
-            print("Encerrando programa...")
-            break
-        else:
-            print("Opção inválida.")
-
+            print("obrigado")
 main()

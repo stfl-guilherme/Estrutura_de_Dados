@@ -1,3 +1,9 @@
+'''
+Crie uma lista circular onde cada nó representa um atleta de um time.
+Cada atleta possui um id e uma variável que representa se estão ou não com o bastão (True ou False)
+Implemente funções para adicionar e remover atletas.
+Faça uma simulação onde o bastão é passado de atleta para atleta (percorra a lista circular algumas vezes, mostrando quem tem o bastão em cada turno).
+'''
 class No:
     def __init__(self, id):
         self.id = id
@@ -8,7 +14,7 @@ class No:
 def adicionar_atleta(lista, id):
     aux = No(id)
     if lista == None:
-        aux.bastao = True  # primeiro atleta começa com bastão
+        aux.bastao = True
         lista = aux
         lista.proximo = aux
         lista.anterior = aux
@@ -19,63 +25,61 @@ def adicionar_atleta(lista, id):
         aux.anterior = ultimo
         ultimo.proximo = aux 
         lista.anterior = aux
-        return lista
+        return aux
 
 def remover_atleta(lista, id):
-    if lista is None:
-        print("Lista vazia")
-        return None
-
     aux = lista
     while True:
         if aux.id == id: 
+            
             if aux.proximo == aux: 
-                return None  # único atleta removido
+                return None 
 
-            if aux.bastao:  
-                # se quem saiu tinha o bastão, passa para o próximo
-                aux.proximo.bastao = True
-
-            aux.anterior.proximo = aux.proximo
-            aux.proximo.anterior = aux.anterior
-
-            if aux == lista:
-                return aux.proximo
+            elif aux == lista:
+                aux.proximo.anterior = aux.anterior
+                aux.anterior.proximo = aux.proximo
+                return lista.proximo
+            
+            elif aux.proximo == lista:
+                aux.anterior.proximo = lista 
+                aux.proximo.anterior = aux.anterior
+                return lista 
+            
             else:
+                aux.proximo.anterior = aux.anterior
+                aux.anterior.proximo = aux.proximo
                 return lista
-
         aux = aux.proximo
         if aux == lista:
             print("Atleta não encontrado")
-            return lista
+            return  
 
-def simular_bastao(lista, voltas=10):
+def simular_bastao(lista):
     if lista is None:
         print("Lista vazia")
-        return None
-
+        return lista
+    
     aux = lista
-    for i in range(voltas):
-        # encontra quem tem o bastão
-        while not aux.bastao:
-            aux = aux.proximo
-
-        print(f"Turno {i+1}: Atleta {aux.id} está com o bastão")
-
-        # passa o bastão
-        aux.bastao = False
-        aux.proximo.bastao = True
+    while True: 
+        if aux.bastao == True:
+            print("\nAtleta -", aux.id)
+            print("Com bastão\n")
+            aux.bastao = False
+            aux.proximo.bastao = True
+            break
         aux = aux.proximo
-
+        if aux == lista:
+            break
+    
     return lista
 
 def menu():
-    print("\n-=- MENU -=-")
-    print("1 - Inserir")
-    print("2 - Remover")
-    print("3 - Simular")
-    print("4 - Sair")
-    opc = int(input("Digite a opção: "))
+    print("-=-MENU-=-")
+    print("1- Inserir")
+    print("2- Remover")
+    print("3- Simular")
+    print("4- Sair")
+    opc = int(input("\nDigite a opção:\n"))
     return opc
 
 def main():
@@ -91,8 +95,7 @@ def main():
             id = int(input("Digite o ID do atleta para remover: "))
             lista = remover_atleta(lista, id)
         elif opc == 3:
-            voltas = int(input("Quantos turnos deseja simular? "))
-            lista = simular_bastao(lista, voltas)
+            lista = simular_bastao(lista)
         elif opc == 4:
             print("Obrigado")
 
