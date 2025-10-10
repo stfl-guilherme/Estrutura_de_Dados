@@ -1,0 +1,78 @@
+def menu():
+    print("\nMenu:")
+    print("1. Adicionar jogador ao final da fila")
+    print("2. Remover jogador específico")
+    print("3. Simular 1 rodada")
+    print("4. Simular N rodadas")
+    print("5. Mostrar fila")
+    print("6. Mostrar próximo a jogar")
+    print("7. Limpar fila")
+    print("8. Sair")
+
+def main():
+    fila = []
+
+    while True:
+        menu()
+        opcao = input("Escolha uma opção (1-8): ")
+
+        if opcao == "1":
+            nome = input("Nome do jogador: ")
+            fila.append(nome)
+            print("Jogador adicionado.")
+
+        elif opcao == "2":
+            nome = input("Nome do jogador a remover: ")
+            if nome in fila:
+                fila.remove(nome)
+                print("Jogador removido.")
+            else:
+                print("Jogador não encontrado.")
+
+        elif opcao == "3":
+            if fila:
+                jogador = fila.pop(0)
+                print("Jogador da rodada:", jogador)
+                fila.append(jogador)
+            else:
+                print("Fila vazia.")
+
+        elif opcao == "4":
+            if not fila:
+                print("Fila vazia.")
+                continue
+            try:
+                n = int(input("Número de rodadas: "))
+                for i in range(n):
+                    jogador = fila.pop(0)
+                    print("Rodada", i + 1, "- Jogador:", jogador)
+                    fila.append(jogador)
+            except:
+                print("Entrada inválida.")
+
+        elif opcao == "5":
+            if fila:
+                print("Fila de jogadores:")
+                for i, jogador in enumerate(fila, 1):
+                    print(str(i) + ". " + jogador)
+            else:
+                print("Fila vazia.")
+
+        elif opcao == "6":
+            if fila:
+                print("Próximo a jogar:", fila[0])
+            else:
+                print("Fila vazia.")
+
+        elif opcao == "7":
+            fila.clear()
+            print("Fila limpa.")
+
+        elif opcao == "8":
+            print("Encerrando.")
+            break
+
+        else:
+            print("Opção inválida.")
+
+main()
