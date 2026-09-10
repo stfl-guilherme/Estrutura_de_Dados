@@ -14,5 +14,9 @@ Aqui estão meus exercícios, projetos e implementações feitos ao longo da dis
 O objetivo é servir como material de estudo e referência prática 📖
 </p>
 
-<hr>
+<p align="center">
+Após concluir a cadeira, também passei a atuar como <strong>tutor de Estrutura de Dados</strong>.<br>
+Por isso, este repositório passa a reunir também os exercícios resolvidos como parte da tutoria 👨‍🏫
+</p>
 
+<hr>
