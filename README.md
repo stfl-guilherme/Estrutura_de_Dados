@@ -15,7 +15,7 @@ O objetivo é servir como material de estudo e referência prática 📖
 </p>
 
 <p align="center">
-Após concluir a cadeira, também passei a atuar como <strong>tutor de Estrutura de Dados</strong>.<br>
+Após concluir a cadeira, também passei a atuar como Monitor de Estrutura de Dados.<br>
 Por isso, este repositório passa a reunir também os exercícios resolvidos como parte da tutoria 👨‍🏫
 </p>
 
