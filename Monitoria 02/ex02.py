@@ -19,7 +19,7 @@ def inserir(fila, valor):
 
 def listar(fila):
     if fila is None:
-        print("Fila vazia.")
+        print("Fila de impressão vazia.")
         return
     aux = fila
     contador = 1
@@ -31,37 +31,37 @@ def listar(fila):
 
 def mostrar_proximo(fila):
     if fila is None:
-        print("Fila vazia.")
+        print("Fila de impressão vazia.")
         return
-    print("Próximo a ser chamado:", fila.valor)
+    print("Próximo documento a imprimir:", fila.valor)
 
 
 def excluir(fila):
     if fila is None:
-        print("Fila vazia.")
+        print("Fila de impressão vazia.")
         return None
     removido = fila
     fila = fila.proximo
     if fila is not None:
         fila.anterior = None
-    print("Chamado:", removido.valor)
+    print("Impresso:", removido.valor)
     return fila
 
 
 def main():
     fila = None
     while True:
-        print("\n--- Check-in Aeroporto ---")
-        print("1 - Inserir passageiro na fila")
-        print("2 - Chamar próximo passageiro")
-        print("3 - Mostrar fila atual")
-        print("4 - Mostrar próximo a ser chamado")
+        print("\n--- Fila de Impressão ---")
+        print("1 - Enviar documento para impressão")
+        print("2 - Imprimir próximo documento")
+        print("3 - Mostrar fila de impressão")
+        print("4 - Mostrar próximo documento")
         print("5 - Sair")
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
-            nome = input("Nome do passageiro: ")
-            fila = inserir(fila, nome)
+            doc = input("Nome do documento: ")
+            fila = inserir(fila, doc)
         elif opcao == "2":
             fila = excluir(fila)
         elif opcao == "3":

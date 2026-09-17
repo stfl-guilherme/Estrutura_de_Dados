@@ -19,7 +19,7 @@ def inserir(fila, valor):
 
 def listar(fila):
     if fila is None:
-        print("Fila vazia.")
+        print("Nenhum carro na fila.")
         return
     aux = fila
     contador = 1
@@ -31,37 +31,37 @@ def listar(fila):
 
 def mostrar_proximo(fila):
     if fila is None:
-        print("Fila vazia.")
+        print("Nenhum carro na fila.")
         return
-    print("Próximo a ser chamado:", fila.valor)
+    print("Próximo carro a passar:", fila.valor)
 
 
 def excluir(fila):
     if fila is None:
-        print("Fila vazia.")
+        print("Nenhum carro na fila.")
         return None
     removido = fila
     fila = fila.proximo
     if fila is not None:
         fila.anterior = None
-    print("Chamado:", removido.valor)
+    print("Passou pela cabine:", removido.valor)
     return fila
 
 
 def main():
     fila = None
     while True:
-        print("\n--- Check-in Aeroporto ---")
-        print("1 - Inserir passageiro na fila")
-        print("2 - Chamar próximo passageiro")
+        print("\n--- Fila do Pedágio ---")
+        print("1 - Carro entra na fila")
+        print("2 - Carro passa pela cabine")
         print("3 - Mostrar fila atual")
-        print("4 - Mostrar próximo a ser chamado")
+        print("4 - Mostrar próximo carro")
         print("5 - Sair")
         opcao = input("Escolha uma opção: ")
 
         if opcao == "1":
-            nome = input("Nome do passageiro: ")
-            fila = inserir(fila, nome)
+            placa = input("Placa do carro: ")
+            fila = inserir(fila, placa)
         elif opcao == "2":
             fila = excluir(fila)
         elif opcao == "3":
